@@ -1,0 +1,26 @@
+---
+- name: Ansible mysql_user module dependancies are present.
+  yum:
+    name: MySQL-python
+    state: present
+- name: Mariadb Client packages are present.
+  yum:
+    name: mariadb-libs, mariadb
+    state: present
+- name: Mariadb server packages are present.
+  yum:
+    name: mariadb-server
+    state: present
+  register: mariadb_server_install
+- name: Configure Mariadb socket
+  template:
+    src: network.cnf.j2
+    dest: /etc/my.cnf.d/network.cnf
+  register: mariadb_network
+- name: re-start maridb service
+  service:
+    name: mariadb
+    state: restarted
+  when: mariadb_server_install.changed == true or mariadb_network.changed == true 
+- name: mysql_secure_installation
+  import_tasks: mysql_secure_installation.yml

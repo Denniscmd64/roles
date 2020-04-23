@@ -1,0 +1,6 @@
+---
+# use 127.0.0.1 for local tcp connection or 'localhost'for unix-socket
+mariadb_bind_address: '127.0.0.1'
+
+# default root password if non is defined
+mariadb_root_password: '12345password'
