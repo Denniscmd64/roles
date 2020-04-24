@@ -1,0 +1,19 @@
+---
+- name: import centos7 install tasks
+  import_tasks: install-centos7.yml
+  when: ansible_distribution_major_version == "7"
+
+- name: import Debian install tasks
+  import_tasks: install-debian.yml
+  when: ansible_os_family == "Debian"
+
+- name: mysql_secure_installation
+  import_tasks: mysql_secure_installation.yml
+
+- name: mariadb databases
+  import_tasks: databases.yml
+  when: mariadb_databases is defined
+
+- name: mariadb users
+  import_tasks: users.yml
+  when: mariadb_users is defined

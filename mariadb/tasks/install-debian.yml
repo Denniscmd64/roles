@@ -1,0 +1,29 @@
+---
+- name: Ansible mysql Python modules dependancies are present.
+  apt:
+    name: python3-pymysql
+    state: present
+- name: Mariadb Client packages are present.
+  apt:
+    name: mariadb-client
+    state: present
+- name: Mariadb server packages are present.
+  apt:
+    name: mariadb-server
+    state: present
+  register: mariadb_server_install
+- name: Configure Mariadb socket
+  template:
+    src: network.cnf.j2
+    dest: /etc/mysql/mariadb.conf.d/50-server.cnf
+  register: mariadb_network
+- name: re-start maridb service
+  service:
+    name: mariadb
+    state: restarted
+  when: mariadb_server_install.changed == true or mariadb_network.changed == true
+- name: mariadb service is enabled
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
