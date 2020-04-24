@@ -1,0 +1,35 @@
+---
+- name: install packages
+  apt:
+    name: ['apache2', 'php', 'php-json', 'php-xml', 'php-mbstring', 'php-mysql', 'python3-pymysql', 'mariadb-client']
+    state: present
+- name: create /var/www/mediawiki folder
+  file:
+    path: /var/www/mediawiki
+    state: directory
+    owner: root
+    group : root
+    mode: '0755'
+- name: mediawiki sites-available config file
+  template:
+    src: 100-mediawiki.conf.j2
+    dest: /etc/apache2/sites-available/100-mediawiki.conf
+    owner: root
+    group: root 
+- name: create softlink from sites-available to sites-enabled
+  file:
+    src: /etc/apache2/sites-available/100-mediawiki.conf
+    dest: /etc/apache2/sites-enabled/100-mediawiki.conf
+    state: link
+    owner: root
+    group: root
+  notify: restart apache2
+- name: download and unarchive media wiki binairies
+  unarchive:
+    src: https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.3.tar.gz
+    dest: /var/www/mediawiki/
+    remote_src: yes
+    owner: root
+    group: root
+    keep_newer: yes
+    extra_opts: [--strip-components=1]

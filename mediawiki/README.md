@@ -1,1 +1,1 @@
-## mediawiki
+## mediawiki Ansible role
