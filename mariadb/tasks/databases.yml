@@ -7,5 +7,5 @@
     state: present
     login_user: root
     login_password: "{{ mariadb_root_password }}"
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ db_socket }}"
   with_items: '{{ mariadb_databases }}'

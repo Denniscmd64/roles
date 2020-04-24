@@ -6,7 +6,7 @@
         name: root
         login_user: root
         login_password: '{{ mariadb_root_password }}'
-        login_unix_socket: /var/lib/mysql/mysql.sock
+        login_unix_socket: "{{ db_socket }}"
       no_log: true  
   rescue:
     - name: 1. Root password is present
@@ -16,7 +16,7 @@
         host: localhost 
         state: present
         login_user: root
-        login_unix_socket: /var/lib/mysql/mysql.sock
+        login_unix_socket: "{{ db_socket }}"
       no_log: true
       register: root_password_present
 - name: 2. Anonamous users absent
@@ -26,7 +26,7 @@
     state: absent
     login_user: root
     login_password: '{{ mariadb_root_password }}'
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ db_socket }}"
   no_log: true
 - name: 3. Dissalow root login remote
   mysql_user:
@@ -36,7 +36,7 @@
     state: present
     login_user: root
     login_password: "{{ mariadb_root_password }}"
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ db_socket }}"
   with_items:
     - ::1
     - 127.0.0.1
@@ -48,4 +48,4 @@
     state: absent
     login_user: root
     login_password: "{{ mariadb_root_password }}"
-    login_unix_socket: /var/lib/mysql/mysql.sock
+    login_unix_socket: "{{ db_socket }}"
