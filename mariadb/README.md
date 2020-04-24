@@ -46,13 +46,16 @@ mariadb_users:
   - dbuser: 'steven'
     password: 'P@ssword123'
     host:  'localhost'
+    privileges: '*.*:ALL'  
   - dbuser: 'james'
     password: 'P@ssword456'
     host:  'localhost'
+    privileges: '*.*:'SELECT,UPDATE,INSERT,DELETE,CREATE'  
   - dbuser: 'tiger'
     password: 'P@ssword789'
     host:  'localhost'
-```
+    privileges: 'dennisdb.*:ALL,GRANT'
+ ```
 
 ## Ansible-playbook example
 
@@ -64,7 +67,7 @@ mariadb_users:
     mariadb_databases:
       - { name: '1st_database', collation: 'utf8_general_ci', encoding: 'utf8' }
     mariadb_users:
-      - { name: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*:ALL' }
+      - { name: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*.*:ALL' }
   roles:
     - mariadb
 ```
