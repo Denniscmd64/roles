@@ -1,0 +1,12 @@
+---
+- name: Users and privilages
+  mysql_user:
+    name: '{{ item.dbuser }}'
+    password: '{{ item.password }}'
+    host: '{{ item.host }}'
+    priv: '{{ item.privileges }}'
+    state: present
+    login_user: root
+    login_password: "{{ mariadb_root_password }}"
+    login_unix_socket: /var/lib/mysql/mysql.sock
+  with_items: '{{ mariadb_users }}'
