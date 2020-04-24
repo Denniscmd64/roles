@@ -37,7 +37,7 @@ mariadb_databases:
 ```yaml
 mariadb_users:
   - { dbuser: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*.*:ALL' }
-  - { dbuser: 'james', password: 'P@ssword456', host: 'localhost', privileges: '*.*:'SELECT,UPDATE,INSERT,DELETE,CREATE' }
+  - { dbuser: 'james', password: 'P@ssword456', host: 'localhost', privileges: '*.*:SELECT,UPDATE,INSERT,DELETE,CREATE' }
   - { dbuser: 'tiger', password: 'P@ssword789', host: 'localhost', privileges: 'dennisdb.*:ALL,GRANT' }
 ```
 
