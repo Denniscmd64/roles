@@ -7,6 +7,10 @@
   import_tasks: install-debian.yml
   when: ansible_os_family == "Debian"
 
+- name: import Suse install tasks
+  import_tasks: install-suse.yml
+  when: ansible_os_family == "Suse"
+
 - name: mysql_secure_installation
   import_tasks: mysql_secure_installation.yml
 

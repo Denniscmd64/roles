@@ -1,4 +1,3 @@
 ---
-#- include_tasks: setup-ubuntu.yml
-#  when: ansible_os_family == 'Debian'
-- include_tasks: setup-mariadb.yml
+- include_tasks: setup-ubuntu.yml
+  when: ansible_os_family == 'Debian'

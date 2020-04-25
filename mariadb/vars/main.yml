@@ -1,3 +1,5 @@
 ---
   # unix db_socket variable declaired by ansible_os_family fact
   db_socket: "{{ '/var/run/mysqld/mysqld.sock' if ansible_os_family == 'Debian' else '/var/lib/mysql/mysql.sock' }}"
+
+

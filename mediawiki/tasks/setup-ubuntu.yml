@@ -1,7 +1,7 @@
 ---
 - name: install packages
   apt:
-    name: ['apache2', 'php', 'php-json', 'php-xml', 'php-mbstring', 'php-mysql', 'python3-pymysql', 'mariadb-client']
+    name: ['apache2', 'php', 'php-json', 'php-xml', 'php-mbstring', 'php-mysql']
     state: present
 - name: create /var/www/mediawiki folder
   file:
