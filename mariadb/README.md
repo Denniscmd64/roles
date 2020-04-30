@@ -5,10 +5,14 @@
 This role is for deploying and maintaining a mariadb service and associated databases users and permissions.
 For the time being it's only for local db connections.
 
+Role ERRORS when a root password is already set and is not equal to the 'mariadb_root_password' variable.(as it should)
+
 ## Testen on following OS
 
 - Centos 7
+- Ubuntu 16.04
 - Ubuntu 18.04
+- Ubuntu 20.04
 
 ## Database example usages
 
@@ -37,7 +41,7 @@ mariadb_databases:
 ```yaml
 mariadb_users:
   - { dbuser: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*.*:ALL' }
-  - { dbuser: 'james', password: 'P@ssword456', host: 'localhost', privileges: '*.*:SELECT,UPDATE,INSERT,DELETE,CREATE' }
+  - { dbuser: 'james', password: 'P@ssword456', host: 'localhost', privileges: '*.*:'SELECT,UPDATE,INSERT,DELETE,CREATE' }
   - { dbuser: 'tiger', password: 'P@ssword789', host: 'localhost', privileges: 'dennisdb.*:ALL,GRANT' }
 ```
 
@@ -46,16 +50,13 @@ mariadb_users:
   - dbuser: 'steven'
     password: 'P@ssword123'
     host:  'localhost'
-    privileges: '*.*:ALL'  
   - dbuser: 'james'
     password: 'P@ssword456'
     host:  'localhost'
-    privileges: '*.*:'SELECT,UPDATE,INSERT,DELETE,CREATE'  
   - dbuser: 'tiger'
     password: 'P@ssword789'
     host:  'localhost'
-    privileges: 'dennisdb.*:ALL,GRANT'
- ```
+```
 
 ## Ansible-playbook example
 
@@ -64,10 +65,11 @@ mariadb_users:
 - hosts: testhost02
   become: yes
   vars:
+    mariadb_root_password: '12345password'
     mariadb_databases:
       - { name: '1st_database', collation: 'utf8_general_ci', encoding: 'utf8' }
     mariadb_users:
-      - { name: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*.*:ALL' }
+      - { name: 'steven', password: 'P@ssword123', host: 'localhost', privileges: '*:ALL' }
   roles:
     - mariadb
 ```

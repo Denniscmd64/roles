@@ -19,6 +19,7 @@
         login_unix_socket: "{{ db_socket }}"
       no_log: true
       register: root_password_present
+
 - name: 2. Anonamous users absent
   mysql_user:
     name: ''
@@ -28,6 +29,7 @@
     login_password: '{{ mariadb_root_password }}'
     login_unix_socket: "{{ db_socket }}"
   no_log: true
+
 - name: 3. Dissalow root login remote
   mysql_user:
     name: root
@@ -42,6 +44,7 @@
     - 127.0.0.1
     - localhost
   no_log: true
+
 - name: 4. Test database absent
   mysql_db:
     name: test
