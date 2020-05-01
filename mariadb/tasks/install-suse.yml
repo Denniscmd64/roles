@@ -16,7 +16,7 @@
 
 - name: Configure Mariadb socket
   template:
-    src: my.cnf.j2
+    src: my.cnf_suse.j2
     dest: /etc/my.cnf
   register: mariadb_network
 
