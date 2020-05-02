@@ -1,4 +1,8 @@
 ---
+- name: socket location fact
+  set_fact: 
+    db_socket: /var/run/mysqld/mysqld.sock
+
 - name: Ansible mysql Python modules dependancies are present.
   apt:
     name: python3-pymysql

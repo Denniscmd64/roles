@@ -13,6 +13,7 @@ Role ERRORS when a root password is already set and is not equal to the 'mariadb
 - Ubuntu 16.04
 - Ubuntu 18.04
 - Ubuntu 20.04
+- OpenSuse Leap 15.1
 
 ## Database example usages
 

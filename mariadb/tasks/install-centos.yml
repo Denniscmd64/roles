@@ -1,4 +1,8 @@
 ---
+- name: socket location fact
+  set_fact: 
+    db_socket: /var/lib/mysql/mysql.sock
+
 - name: Ansible mysql modules dependancies are present.
   yum:
     name: MySQL-python

@@ -1,4 +1,8 @@
 ---
+- name: socket location fact
+  set_fact: 
+    db_socket: /var/run/mysql/mysql.sock
+
 - name: Ansible mysql Python modules dependancies are present.
   zypper:
     name: python3-PyMySQL
