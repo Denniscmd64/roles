@@ -1,3 +1,6 @@
 ---
-  # maria db service name on ubuntu systems.
-  ubuntu_service: "{{ 'mysql' if ansible_distribution_version == '16.04' else 'mariadb' }}"
+# maria db service name on ubuntu systems.
+ubuntu_service: "{{ 'mysql' if ansible_distribution_version == '16.04' else 'mariadb' }}"
+
+# Centos 7 or 8 Ansible dependencie of pyhton3 mysql library
+centos_pymysql: "{{ 'python3-PyMySQL' if ansible_distribution_major_version == '8' else 'MySQL-python' }}"

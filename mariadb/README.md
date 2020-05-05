@@ -10,10 +10,17 @@ Role ERRORS when a root password is already set and is not equal to the 'mariadb
 ## Testen on following OS
 
 - Centos 7
+- Centos 8
 - Ubuntu 16.04
 - Ubuntu 18.04
 - Ubuntu 20.04
 - OpenSuse Leap 15.1
+
+## Variables
+
+- mariadb_bind_address sets the bind addres for the mariadb service, it is defined in defaults as '127.0.0.1'.
+
+ -mariadb_root_password sets/uses the mariadb root password, it is defined in defaults as '12345password' PLEASE USE THIS VARIABLE IN YOUR PLAYBOOK!! for abvious security reasons
 
 ## Database example usages
 

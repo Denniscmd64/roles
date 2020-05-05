@@ -5,13 +5,14 @@
 
 - name: Ansible mysql modules dependancies are present.
   yum:
-    name: MySQL-python
+    name: "{{ centos_pymysql }}"
     state: present
 
 - name: Mariadb Client packages are present.
   yum:
     name: mariadb-libs, mariadb
     state: present
+  when: ansible_distribution_major_version == '7'
 
 - name: Mariadb server packages are present.
   yum:
