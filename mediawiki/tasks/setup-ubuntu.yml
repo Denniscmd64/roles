@@ -3,6 +3,7 @@
   apt:
     name: ['apache2', 'php', 'php-json', 'php-xml', 'php-mbstring', 'php-mysql']
     state: present
+
 - name: create /var/www/mediawiki folder
   file:
     path: /var/www/mediawiki
@@ -10,12 +11,14 @@
     owner: root
     group : root
     mode: '0755'
+
 - name: mediawiki sites-available config file
   template:
     src: 100-mediawiki.conf.j2
     dest: /etc/apache2/sites-available/100-mediawiki.conf
     owner: root
     group: root 
+
 - name: create softlink from sites-available to sites-enabled
   file:
     src: /etc/apache2/sites-available/100-mediawiki.conf
@@ -24,6 +27,7 @@
     owner: root
     group: root
   notify: restart apache2
+
 - name: download and unarchive media wiki binairies
   unarchive:
     src: https://releases.wikimedia.org/mediawiki/1.33/mediawiki-1.33.3.tar.gz

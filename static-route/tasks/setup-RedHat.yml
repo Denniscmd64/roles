@@ -6,6 +6,7 @@
   failed_when: "'Cannot find device' in iprouteadd_result.stderr or 'Network is unreachable' in iprouteadd_result.stderr"
   changed_when: iprouteadd_result.rc == 0
   loop: "{{ statroute_list }}"
+
 - name: Adding a static route to device static-route file, if not exists
   lineinfile:
     path: /etc/sysconfig/network-scripts/route-{{ item.device }}
